@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\{AdminController,AuthController};
+// use Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,29 +29,32 @@ Route::get('/', function () {
 // Route::get('foto/{product}',[ProductController::class,'tampil']);
 
 // Route::get('/fetch_image/{product}',[ProductController::class,'fetch_image']);
-Route::get('/login',[AuthController::class,'login']);
+Route::get('/login',[AuthController::class,'login'])->name('login');
 Route::post('/postlogin',[AuthController::class,'postlogin']);
+Route::get('/logout',[AuthController::class,'logout']);
 
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/dashboard',[AdminController::class,'dashboard']);
+    Route::get('/produk/terbaru',[AdminController::class,'produkterbaru']);
+    Route::get('/produk/tampil',[AdminController::class,'produktampil']);
+    Route::get('/produk/detail/{product}',[AdminController::class,'detailproduk']);
+    Route::post('/produk/update/{product}',[AdminController::class,'update']);
+    Route::get('/produk/hapus/{product}',[AdminController::class,'hapusProductById']);
+    
+    Route::get('/kategori',[AdminController::class,'getAllKategori']);
+    Route::post('/kategori',[AdminController::class,'tambahKategori']);
+    Route::get('/hapuskategori/{kategori}',[AdminController::class,'hapusKategori']);
+    
+    Route::get('/jasa/terbaru',[AdminController::class,'jasaterbaru']);
+    Route::get('/jasa/tampil',[AdminController::class,'jasatampil']);
+    Route::get('/jasa/detail/{jasa}',[AdminController::class,'detailjasa']);
+    Route::post('/jasa/updatejasa/{jasa}',[AdminController::class,'updatejasa']);
+    Route::get('/jasa/hapus/{jasa}',[AdminController::class,'hapusJasaById']);
+    
+    Route::get('/ulasan/produk',[AdminController::class,'getAllProduk']);
+    Route::get('/ulasan/produk/{product}',[AdminController::class,'getUlasanByIdProduk']);
+    
+    Route::get('/ulasan/jasa',[AdminController::class,'getAllJasa']);
+    Route::get('/ulasan/jasa/{product}',[AdminController::class,'getUlasanByIdJasa']);
+});
 
-Route::get('/kategori',[AdminController::class,'getAllKategori']);
-Route::post('/kategori',[AdminController::class,'tambahKategori']);
-Route::get('/hapuskategori/{kategori}',[AdminController::class,'hapusKategori']);
-
-Route::get('/dashboard',[AdminController::class,'dashboard']);
-Route::get('/produk/terbaru',[AdminController::class,'produkterbaru']);
-Route::get('/produk/tampil',[AdminController::class,'produktampil']);
-Route::get('/produk/detail/{product}',[AdminController::class,'detailproduk']);
-Route::post('/produk/update/{product}',[AdminController::class,'update']);
-Route::get('/produk/hapus/{product}',[AdminController::class,'hapusProductById']);
-
-Route::get('/jasa/terbaru',[AdminController::class,'jasaterbaru']);
-Route::get('/jasa/tampil',[AdminController::class,'jasatampil']);
-Route::get('/jasa/detail/{jasa}',[AdminController::class,'detailjasa']);
-Route::post('/jasa/updatejasa/{jasa}',[AdminController::class,'updatejasa']);
-Route::get('/jasa/hapus/{jasa}',[AdminController::class,'hapusJasaById']);
-
-Route::get('/ulasan/produk',[AdminController::class,'getAllProduk']);
-Route::get('/ulasan/produk/{product}',[AdminController::class,'getUlasanByIdProduk']);
-
-Route::get('/ulasan/jasa',[AdminController::class,'getAllJasa']);
-Route::get('/ulasan/jasa/{product}',[AdminController::class,'getUlasanByIdJasa']);

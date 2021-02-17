@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -14,7 +15,20 @@ class AuthController extends Controller
     public function postlogin(Request $request)
     {
         // return view('/auths/login');
-        return $request;
+
+        if(Auth::attempt($request->only('name','password'))){
+            return redirect('/dashboard');
+        }else{
+            return redirect('login');
+        }
+        // return $request;
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect('/login');
     }
 
 }
