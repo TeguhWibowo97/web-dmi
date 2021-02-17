@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\{AdminController,AuthController};
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +28,9 @@ Route::get('/', function () {
 // Route::get('foto/{product}',[ProductController::class,'tampil']);
 
 // Route::get('/fetch_image/{product}',[ProductController::class,'fetch_image']);
+Route::get('/login',[AuthController::class,'login']);
+Route::post('/postlogin',[AuthController::class,'postlogin']);
+
 
 Route::get('/kategori',[AdminController::class,'getAllKategori']);
 Route::post('/kategori',[AdminController::class,'tambahKategori']);
