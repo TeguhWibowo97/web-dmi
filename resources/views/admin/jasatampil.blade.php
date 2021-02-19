@@ -33,7 +33,7 @@
                 <td><span class="badge bg-success text-white">{{$j->nama_kategori}}</span></td>
                 <td>
                     <a href="/jasa/detail/{{$j->id}}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Detail</a>
-                    <a href="/jasa/hapus/{{$j->id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Hapus</a>
+                    <a href="/jasa/hapus/{{$j->id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt" onclick="javascript:return confirm('apakah yakin akan menghapus data ?')"></i> Hapus</a>
                 </td>
             </tr>
             @endforeach

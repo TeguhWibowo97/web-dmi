@@ -26,7 +26,7 @@
                 <td><?php echo e($loop->iteration); ?></td>
                 <td><?php echo e($k->nama_kategori); ?></td>
                 <td>
-                    <a href="/hapuskategori/<?php echo e($k->id_kategori); ?>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                    <a href="/hapuskategori/<?php echo e($k->id_kategori); ?>" class="btn btn-danger btn-sm" onclick="javascript:return confirm('apakah yakin akan menghapus data ?')"><i class="fas fa-trash-alt"></i></a>
                 </td>
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

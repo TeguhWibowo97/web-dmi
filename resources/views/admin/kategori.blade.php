@@ -26,7 +26,7 @@
                 <td>{{$loop->iteration}}</td>
                 <td>{{$k->nama_kategori}}</td>
                 <td>
-                    <a href="/hapuskategori/{{$k->id_kategori}}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                    <a href="/hapuskategori/{{$k->id_kategori}}" class="btn btn-danger btn-sm" onclick="javascript:return confirm('apakah yakin akan menghapus data ?')"><i class="fas fa-trash-alt"></i></a>
                 </td>
             </tr>
             @endforeach

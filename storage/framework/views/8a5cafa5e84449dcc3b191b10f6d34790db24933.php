@@ -33,7 +33,7 @@
                 <td><span class="badge bg-success text-white"><?php echo e($p->nama_kategori); ?></span></td>
                 <td>
                     <a href="/produk/detail/<?php echo e($p->id); ?>" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Detail</a>
-                    <a href="/produk/hapus/<?php echo e($p->id); ?>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Hapus</a>
+                    <a href="/produk/hapus/<?php echo e($p->id); ?>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt" onclick="javascript:return confirm('apakah yakin akan menghapus data ?')"></i> Hapus</a>
                 </td>
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
