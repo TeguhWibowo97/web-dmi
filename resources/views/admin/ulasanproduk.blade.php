@@ -32,7 +32,7 @@
                 <td>
                     <a href="/ulasan/produk/{{$p->id}}" class="btn btn-primary">
                         <i class="fas fa-eye"></i>
-                        Detail
+                        Lihat Ulasan
                     </a>
                 </td>
             </tr>

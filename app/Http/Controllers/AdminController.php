@@ -153,7 +153,7 @@ class AdminController extends Controller
 
     public function getAllProduk()
     {
-        $produk = Product::all();
+        $produk = Product::where('status_aktif',1)->get();
 
         return view('admin/ulasanproduk',['produk'=>$produk]);
         // return $produk;
@@ -168,7 +168,7 @@ class AdminController extends Controller
     }
     public function getAllJasa()
     {
-        $jasa = MJasa::all();
+        $jasa = MJasa::where('status_aktif',1)->get();
 
         return view('admin/ulasanjasa',['jasa'=>$jasa]);
         // return $produk;

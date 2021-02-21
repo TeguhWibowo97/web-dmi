@@ -18,6 +18,11 @@
                     <i class="fas fa-edit"></i>
                     Edit Data
                 </button>
+                <button type="button" class="btn btn-success btn-block mt-1" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                    <i class="fas fa-images"></i>
+                    Edit Foto
+                </button>
             </div>
             <div class="col-md-8">
                 <div class="card-body">

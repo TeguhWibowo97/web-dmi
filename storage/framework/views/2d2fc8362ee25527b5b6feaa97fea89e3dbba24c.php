@@ -18,7 +18,7 @@
 <div class="container">
     <div class="container">
         <div class="row">
-            
+
             <?php if(!$ulasan->isEmpty()): ?>
             <?php $__currentLoopData = $ulasan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $u): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="card mb-2 col-md-6">

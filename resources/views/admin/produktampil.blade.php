@@ -32,7 +32,7 @@
                 <td>{{$p->nama_pemilik}}</td>
                 <td><span class="badge bg-success text-white">{{$p->nama_kategori}}</span></td>
                 <td>
-                    <a href="/produk/detail/{{$p->id}}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Detail</a>
+                    <a href="/produk/detail/{{$p->id}}" class="btn btn-primary btn-sm mb-1"><i class="fas fa-eye"></i> Detail</a>
                     <a href="/produk/hapus/{{$p->id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt" onclick="javascript:return confirm('apakah yakin akan menghapus data ?')"></i> Hapus</a>
                 </td>
             </tr>
