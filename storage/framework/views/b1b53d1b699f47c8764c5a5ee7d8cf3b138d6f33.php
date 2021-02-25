@@ -6,6 +6,12 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Produk / Detail</li>
     </ol>
+    <?php if($message = Session::get('status')): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong><?php echo e($message); ?></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php endif; ?>
 </div>
 <div class="container">
     <?php $__currentLoopData = $produk; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -87,53 +93,55 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="/produk/update/<?php echo e($p->id); ?>" method="post">
-            <?php echo csrf_field(); ?>
-            <div class="modal-body">
-                <label>Nama Produk</label>
-                <input type="text" name="nama_produk" id="" class="form-control mb-2" value="<?php echo e($p->nama_produk); ?>">
+                <?php echo csrf_field(); ?>
+                <div class="modal-body">
+                    <label>Nama Produk</label>
+                    <input type="text" required name="nama_produk" id="" class="form-control mb-2" value="<?php echo e($p->nama_produk); ?>">
 
-                <label>Harga</label>
-                <input type="text" name="harga" id="" class="form-control mb-2" value="<?php echo e($p->harga); ?>">
+                    <label>Harga</label>
+                    <input type="text" required name="harga" id="" class="form-control mb-2" value="<?php echo e($p->harga); ?>">
 
-                <label>Nama Pemilik</label>
-                <input type="text" name="nama_pemilik" id="" class="form-control mb-2" value="<?php echo e($p->nama_pemilik); ?>">
+                    <label>Nama Pemilik</label>
+                    <input type="text" required name="nama_pemilik" id="" class="form-control mb-2" value="<?php echo e($p->nama_pemilik); ?>">
 
-                <label>Alamat Pemilik</label>
-                <input type="text" name="alamat_pemilik" id="" class="form-control mb-2" value="<?php echo e($p->alamat_pemilik); ?>">
+                    <label>Alamat Pemilik</label>
+                    <input type="text" required name="alamat_pemilik" id="" class="form-control mb-2"
+                        value="<?php echo e($p->alamat_pemilik); ?>">
 
-                <label>Nomor Pemilik</label>
-                <input type="text" name="nomor_pemilik" id="" class="form-control mb-2" value="<?php echo e($p->nomor_pemilik); ?>">
+                    <label>Nomor Pemilik</label>
+                    <input type="text" required name="nomor_pemilik" id="" class="form-control mb-2"
+                        value="<?php echo e($p->nomor_pemilik); ?>">
 
-                <label>Nomor Whatsapp</label>
-                <input type="text" name="nomor_wa" id="" class="form-control mb-2" value="<?php echo e($p->nomor_wa); ?>">
+                    <label>Nomor Whatsapp</label>
+                    <input type="text" required name="nomor_wa" id="" class="form-control mb-2" value="<?php echo e($p->nomor_wa); ?>">
 
-                <label>Kategori</label>
-                <select class="form-select form-control" name="id_kategori" aria-label="Default select example">
-                    <?php $__currentLoopData = $kategori; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <label>Kategori</label>
+                    <select class="form-select form-control" required name="id_kategori" aria-label="Default select example">
+                        <?php $__currentLoopData = $kategori; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php if($k->id_kategori == $p->id_kategori): ?>
-                            <option value="<?php echo e($k->id_kategori); ?>" selected><?php echo e($k->nama_kategori); ?></option>
+                        <option value="<?php echo e($k->id_kategori); ?>" selected><?php echo e($k->nama_kategori); ?></option>
                         <?php else: ?>
-                            <option value="<?php echo e($k->id_kategori); ?>"><?php echo e($k->nama_kategori); ?></option>
+                        <option value="<?php echo e($k->id_kategori); ?>"><?php echo e($k->nama_kategori); ?></option>
                         <?php endif; ?>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </select>
-                
-                <label>Deskripsi</label>
-                <textarea name="deskripsi" cols="30" rows="5" class="form-control"><?php echo e($p->deskripsi); ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </select>
+
+                    <label>Deskripsi</label>
+                    <textarea name="deskripsi" required cols="30" rows="5" class="form-control"><?php echo e($p->deskripsi); ?>
 
                 </textarea>
 
-                <label>Status Aktif</label>
-                <select name="status_aktif" class="form-control form-select">
-                    <option value="0">Tidak Aktif</option>
-                    <option value="1">Aktif</option>
-                </select>
+                    <label>Status Aktif</label>
+                    <select name="status_aktif" class="form-control form-select" required>
+                        <option value="0">Tidak Aktif</option>
+                        <option value="1">Aktif</option>
+                    </select>
 
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
             </form>
         </div>
     </div>
@@ -141,22 +149,25 @@
 
 <!-- Modal Edit Foto-->
 <div class="modal fade" id="modalEditFoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Form Edit Foto</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <label>Pilih Foto : </label>
-        <input type="file" name="foto" class="form-control">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Simpan</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Form Edit Foto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/ubahfotoproduk/<?php echo e($p->id); ?>" method="post" enctype="multipart/form-data">
+                <?php echo csrf_field(); ?>
+                <div class="modal-body">
+                    <label>Pilih Foto : </label>
+                    <input type="file" name="foto" class="form-control" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
 </div>
 
 <?php $__env->stopSection(); ?>

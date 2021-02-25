@@ -6,6 +6,12 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Jasa / Detail</li>
     </ol>
+    @if($message = Session::get('status'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{$message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
 </div>
 <div class="container">
     @foreach($jasa as $j)
@@ -19,7 +25,7 @@
                     Edit Data
                 </button>
                 <button type="button" class="btn btn-success btn-block mt-1" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">
+                    data-bs-target="#modalEditFoto">
                     <i class="fas fa-images"></i>
                     Edit Foto
                 </button>
@@ -136,5 +142,26 @@
         </div>
     </div>
 </div>
-
+<!-- Modal Edit Foto-->
+<div class="modal fade" id="modalEditFoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Form Edit Foto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/ubahfotojasa/{{$j->id}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <label>Pilih Foto : </label>
+                    <input type="file" name="foto" class="form-control" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection

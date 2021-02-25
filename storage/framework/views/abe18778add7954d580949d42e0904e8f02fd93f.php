@@ -13,7 +13,8 @@
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">Produk Terbaru <i class="fas fa-shopping-bag float-right"></i></div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        15
+                        <?php echo e($totalprodukbaru); ?>
+
                     </div>
                 </div>
             </div>
@@ -21,7 +22,8 @@
                 <div class="card bg-warning text-white mb-4">
                     <div class="card-body">Produk Tampil <i class="fas fa-shopping-bag float-right"></i></div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        20
+                        <?php echo e($totalproduktampil); ?>
+
                     </div>
                 </div>
             </div>
@@ -29,7 +31,8 @@
                 <div class="card bg-success text-white mb-4">
                     <div class="card-body">Layanan Jasa Terbaru <i class="fas fa-user-secret float-right"></i></div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        3
+                        <?php echo e($totaljasabaru); ?>
+
                     </div>
                 </div>
             </div>
@@ -37,7 +40,8 @@
                 <div class="card bg-danger text-white mb-4">
                     <div class="card-body">Layanan Jasa Tampil <i class="fas fa-user-secret float-right"></i></div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        15
+                        <?php echo e($totaljasatampil); ?>
+
                     </div>
                 </div>
             </div>

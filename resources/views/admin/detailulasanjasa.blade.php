@@ -33,6 +33,7 @@
                                 @for($i=0; $i<$u->bintang; $i++)
                                     <small class="text-muted"><i class="fas fa-star"></i></small>
                                 @endfor
+                                <a href="/hapus-ulasan/{{$u->id_ulasan}}" class="btn btn-danger btn-sm float-right" onclick="javascript:return confirm('apakah yakin akan menghapus data ?')"><i class="fas fa-trash-alt"></i></a>
                             </p>
                         </div>
                     </div>

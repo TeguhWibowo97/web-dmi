@@ -6,6 +6,12 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Jasa / Tampil</li>
     </ol>
+    <?php if($message = Session::get('status')): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong><?php echo e($message); ?></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php endif; ?>
 </div>
 <div class="container">
     <table class="table table-striped">
@@ -33,7 +39,7 @@
                 <td><span class="badge bg-success text-white"><?php echo e($j->nama_kategori); ?></span></td>
                 <td>
                     <a href="/jasa/detail/<?php echo e($j->id); ?>" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Detail</a>
-                    <a href="/jasa/hapus/<?php echo e($j->id); ?>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt" onclick="javascript:return confirm('apakah yakin akan menghapus data ?')"></i> Hapus</a>
+                    <a href="/jasa/hapus/<?php echo e($j->id); ?>" class="btn btn-danger btn-sm" onclick="javascript:return confirm('apakah yakin akan menghapus data ?')"><i class="fas fa-trash-alt" onclick="javascript:return confirm('apakah yakin akan menghapus data ?')"></i> Hapus</a>
                 </td>
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

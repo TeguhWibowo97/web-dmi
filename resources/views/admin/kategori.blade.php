@@ -8,6 +8,12 @@
     </ol>
 </div>
 <div class="container">
+    @if($message = Session::get('status'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{$message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#modalTambahKategori">
         <i class="fas fa-plus"></i> 
         Tambah Kategori

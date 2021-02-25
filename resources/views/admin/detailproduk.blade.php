@@ -6,6 +6,12 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Produk / Detail</li>
     </ol>
+    @if($message = Session::get('status'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{$message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
 </div>
 <div class="container">
     @foreach($produk as $p)
@@ -87,52 +93,54 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="/produk/update/{{$p->id}}" method="post">
-            @csrf
-            <div class="modal-body">
-                <label>Nama Produk</label>
-                <input type="text" name="nama_produk" id="" class="form-control mb-2" value="{{$p->nama_produk}}">
+                @csrf
+                <div class="modal-body">
+                    <label>Nama Produk</label>
+                    <input type="text" required name="nama_produk" id="" class="form-control mb-2" value="{{$p->nama_produk}}">
 
-                <label>Harga</label>
-                <input type="text" name="harga" id="" class="form-control mb-2" value="{{$p->harga}}">
+                    <label>Harga</label>
+                    <input type="text" required name="harga" id="" class="form-control mb-2" value="{{$p->harga}}">
 
-                <label>Nama Pemilik</label>
-                <input type="text" name="nama_pemilik" id="" class="form-control mb-2" value="{{$p->nama_pemilik}}">
+                    <label>Nama Pemilik</label>
+                    <input type="text" required name="nama_pemilik" id="" class="form-control mb-2" value="{{$p->nama_pemilik}}">
 
-                <label>Alamat Pemilik</label>
-                <input type="text" name="alamat_pemilik" id="" class="form-control mb-2" value="{{$p->alamat_pemilik}}">
+                    <label>Alamat Pemilik</label>
+                    <input type="text" required name="alamat_pemilik" id="" class="form-control mb-2"
+                        value="{{$p->alamat_pemilik}}">
 
-                <label>Nomor Pemilik</label>
-                <input type="text" name="nomor_pemilik" id="" class="form-control mb-2" value="{{$p->nomor_pemilik}}">
+                    <label>Nomor Pemilik</label>
+                    <input type="text" required name="nomor_pemilik" id="" class="form-control mb-2"
+                        value="{{$p->nomor_pemilik}}">
 
-                <label>Nomor Whatsapp</label>
-                <input type="text" name="nomor_wa" id="" class="form-control mb-2" value="{{$p->nomor_wa}}">
+                    <label>Nomor Whatsapp</label>
+                    <input type="text" required name="nomor_wa" id="" class="form-control mb-2" value="{{$p->nomor_wa}}">
 
-                <label>Kategori</label>
-                <select class="form-select form-control" name="id_kategori" aria-label="Default select example">
-                    @foreach($kategori as $k)
+                    <label>Kategori</label>
+                    <select class="form-select form-control" required name="id_kategori" aria-label="Default select example">
+                        @foreach($kategori as $k)
                         @if($k->id_kategori == $p->id_kategori)
-                            <option value="{{$k->id_kategori}}" selected>{{$k->nama_kategori}}</option>
+                        <option value="{{$k->id_kategori}}" selected>{{$k->nama_kategori}}</option>
                         @else
-                            <option value="{{$k->id_kategori}}">{{$k->nama_kategori}}</option>
+                        <option value="{{$k->id_kategori}}">{{$k->nama_kategori}}</option>
                         @endif
-                    @endforeach
-                </select>
-                
-                <label>Deskripsi</label>
-                <textarea name="deskripsi" cols="30" rows="5" class="form-control">{{$p->deskripsi}}
+                        @endforeach
+                    </select>
+
+                    <label>Deskripsi</label>
+                    <textarea name="deskripsi" required cols="30" rows="5" class="form-control">{{$p->deskripsi}}
                 </textarea>
 
-                <label>Status Aktif</label>
-                <select name="status_aktif" class="form-control form-select">
-                    <option value="0">Tidak Aktif</option>
-                    <option value="1">Aktif</option>
-                </select>
+                    <label>Status Aktif</label>
+                    <select name="status_aktif" class="form-control form-select" required>
+                        <option value="0">Tidak Aktif</option>
+                        <option value="1">Aktif</option>
+                    </select>
 
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
             </form>
         </div>
     </div>
@@ -140,22 +148,25 @@
 
 <!-- Modal Edit Foto-->
 <div class="modal fade" id="modalEditFoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Form Edit Foto</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <label>Pilih Foto : </label>
-        <input type="file" name="foto" class="form-control">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Simpan</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Form Edit Foto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/ubahfotoproduk/{{$p->id}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <label>Pilih Foto : </label>
+                    <input type="file" name="foto" class="form-control" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
 </div>
 
 @endsection

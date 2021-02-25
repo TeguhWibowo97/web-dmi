@@ -6,6 +6,12 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Produk / Terbaru</li>
     </ol>
+    <?php if($message = Session::get('status')): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong><?php echo e($message); ?></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php endif; ?>
 </div>
 <div class="container">
     <?php if(!$produk->isEmpty()): ?>

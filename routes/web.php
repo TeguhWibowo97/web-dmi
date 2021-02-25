@@ -56,5 +56,9 @@ Route::group(['middleware' => 'auth'], function(){
     
     Route::get('/ulasan/jasa',[AdminController::class,'getAllJasa']);
     Route::get('/ulasan/jasa/{product}',[AdminController::class,'getUlasanByIdJasa']);
+    Route::get('/hapus-ulasan/{product}',[AdminController::class,'hapusulasan']);
+
+    Route::post('/ubahfotoproduk/{id}',[AdminController::class,'ubahfotoproduk']);
+    Route::post('/ubahfotojasa/{id}',[AdminController::class,'ubahfotojasa']);
 });
 

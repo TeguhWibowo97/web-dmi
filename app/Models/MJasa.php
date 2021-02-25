@@ -11,4 +11,6 @@ class MJasa extends Model
 
     protected $table = "jasa";
 
+    protected $fillable = ['foto_jasa'];
+
 }

@@ -6,6 +6,12 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Ulasan / Produk / Detail</li>
     </ol>
+    @if($message = Session::get('status'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{$message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
 </div>
 <div class="container">
     @foreach($produk as $p)
@@ -32,9 +38,7 @@
                                 @for($i=0; $i<$u->bintang; $i++)
                                     <small class="text-muted"><i class="fas fa-star"></i></small>
                                 @endfor   
-                                <a href="#" class="btn btn-danger btn-sm float-right" onclick="javascript:return confirm('apakah yakin akan menghapus data ?')"><i class="fas fa-trash-alt"></i></a>
-                            </p>
-                            <p class="card-text">
+                                <a href="/hapus-ulasan/{{$u->id_ulasan}}" class="btn btn-danger btn-sm float-right" onclick="javascript:return confirm('apakah yakin akan menghapus data ?')"><i class="fas fa-trash-alt"></i></a>
                             </p>
                         </div>
                     </div>

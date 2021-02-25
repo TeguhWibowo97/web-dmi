@@ -14,7 +14,19 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        return view('admin/dashboard');
+        $totalprodukbaru = Product::where('status_aktif',0)->count();
+        $totalproduktampil = Product::where('status_aktif',1)->count();
+        $totaljasabaru = MJasa::where('status_aktif',0)->count();
+        $totaljasatampil = MJasa::where('status_aktif',1)->count();
+
+        // return $totalprodukbaru;
+
+        return view('admin/dashboard',[
+            'totalprodukbaru'=>$totalprodukbaru,
+            'totalproduktampil'=>$totalproduktampil,
+            'totaljasabaru'=>$totaljasabaru,
+            'totaljasatampil'=>$totaljasatampil
+        ]);
     }
     public function produkterbaru()
     {
@@ -75,7 +87,7 @@ class AdminController extends Controller
             'status_aktif'=>$request->status_aktif
         ]);
 
-        return redirect('/produk/terbaru');
+        return redirect('/produk/terbaru')->with('status','Data Berhasil Diubah');
     }
     public function updatejasa(Request $request, $id)
     {
@@ -92,7 +104,7 @@ class AdminController extends Controller
             'status_aktif'=>$request->status_aktif
         ]);
 
-        return redirect('/jasa/terbaru');
+        return redirect('/jasa/terbaru')->with('status','Data Berhasil Diubah');
     }
 
     public function getAllKategori()
@@ -107,14 +119,14 @@ class AdminController extends Controller
     {
         Mkategori::create($request->all());
 
-        return redirect('kategori');
+        return redirect('kategori')->with('status','Data Berhasil Ditambahkan');
     }
 
     public function hapusKategori($id)
     {
         Mkategori::where('id_kategori',$id)->delete();
 
-        return redirect('kategori');
+        return redirect('kategori')->with('status','Data Berhasil Dihapus');
     }
 
     public function hapusProductById($id)
@@ -126,10 +138,10 @@ class AdminController extends Controller
         if(file_exists($path.$image)){
             unlink($path.$image);
             $produk->delete();
-            return redirect('/produk/tampil');
+            return redirect('/produk/tampil')->with('status','Data Berhasil Dihapus');
         }else{
             $produk->delete();
-            return redirect('/produk/tampil');
+            return redirect('/produk/tampil')->with('status','Data Berhasil Dihapus');
         }
         // return $path.$image;
     }
@@ -142,10 +154,10 @@ class AdminController extends Controller
         if(file_exists($path.$image)){
             unlink($path.$image);
             $jasa->delete();
-            return redirect('/jasa/tampil');
+            return redirect('/jasa/tampil')->with('status','Data Berhasil Dihapus');
         }else{
             $jasa->delete();
-            return redirect('/jasa/tampil');
+            return redirect('/jasa/tampil')->with('status','Data Berhasil Dihapus');
         }
         // return $path.$image;
         // return $id;
@@ -180,6 +192,44 @@ class AdminController extends Controller
         $ulasan = MUlasan::where('id_jasa',$id)->get();
         // return $ulasan;
         return view('admin/detailulasanjasa',['jasa'=>$jasa,'ulasan'=>$ulasan]);
+    }
+
+    public function ubahfotoproduk(Request $request, $id)
+    {
+        $ubah = Product::findorfail($id);
+        $awal = $ubah->foto_produk;
+
+        $data = [
+            'foto_produk'=>$awal,
+        ];
+
+        $request->foto->move(public_path()."/storage/images",$awal);
+        $ubah->update($data);
+        return redirect('produk/detail/'.$id)->with('status','Data Berhasil Diubah');
+    }
+
+    public function ubahfotojasa(Request $request, $id)
+    {
+        $ubah = MJasa::findorfail($id);
+        $awal = $ubah->foto_jasa;
+
+        $data = [
+            'foto_jasa'=>$awal,
+        ];
+
+        $request->foto->move(public_path()."/storage/images",$awal);
+        $ubah->update($data);
+        return redirect('jasa/detail/'.$id)->with('status','Data Berhasil Diubah');
+    }
+
+    public function hapusulasan($id)
+    {
+        // $produk = MUlasan::where('id_ulasan',$id)->get();
+        // $produk = MUlasan::findorfail('id_ulasan',$id);
+        MUlasan::where('id_ulasan',$id)->delete();
+        // $data = $produk->bintang;
+        return redirect()->back()->with('status','Data Berhasil Dihapus');
+        // return $produk->id_produk;
     }
     
 }
